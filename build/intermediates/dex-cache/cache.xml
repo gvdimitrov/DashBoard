@@ -3,93 +3,102 @@
 
     <item
         is-multidex="false"
-        jar="/home/georgi/AndroidStudioProjects/DashBoard/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/25.1.1/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="c03bf57f358aa10d253f21989e93bcf6014b3b17">
-        <dex dex="/home/georgi/AndroidStudioProjects/DashBoard/app/build/intermediates/pre-dexed/debug/com.android.support-support-vector-drawable-25.1.1_b82c401da9691f100bb4b4bb11a25e0c8a714138.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/georgi/AndroidStudioProjects/DashBoard/app/build/intermediates/exploded-aar/com.android.support/support-v4/25.1.1/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
-        <dex dex="/home/georgi/AndroidStudioProjects/DashBoard/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-25.1.1_c8e7433aece3bb6d9b5be283ab12cdbffa79ddf9.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/georgi/AndroidStudioProjects/DashBoard/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/25.1.1/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="0d191c1a09e4892d059e5ce749e4ad4e08129e35">
-        <dex dex="/home/georgi/AndroidStudioProjects/DashBoard/app/build/intermediates/pre-dexed/debug/com.android.support-animated-vector-drawable-25.1.1_8095291d30b5f4c35c090c15a05d9cd8699728c1.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/georgi/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/25.1.1/support-annotations-25.1.1.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="b59b6ee8d6ecc03e672d253800430343493a6ed8">
-        <dex dex="/home/georgi/AndroidStudioProjects/DashBoard/app/build/intermediates/pre-dexed/debug/support-annotations-25.1.1_17def60adc9bb6db97e115d63c13146523c8dce6.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/georgi/AndroidStudioProjects/DashBoard/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.1/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="ecb496cc08dd52551fc5ec6db3bc0632e95a89bb">
-        <dex dex="/home/georgi/AndroidStudioProjects/DashBoard/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-25.1.1_07c2a102a2d90a7c2e03ad7f5fcc2ba67d1ec060.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/georgi/AndroidStudioProjects/DashBoard/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/25.1.1/jars/classes.jar"
+        jar="D:\Coursera\DashBoard\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\25.1.1\jars\classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
         sha1="7bde4c34162092e0a77e7f12dc85ed77c484cf5c">
-        <dex dex="/home/georgi/AndroidStudioProjects/DashBoard/app/build/intermediates/pre-dexed/debug/com.android.support-support-media-compat-25.1.1_c3e546b7472d5e4e3b31b8e1deb376c1b0a648e9.jar" />
+        <dex dex="D:\Coursera\DashBoard\app\build\intermediates\pre-dexed\debug\com.android.support-support-media-compat-25.1.1_ebd22cd0c642d9b34f8dc2c16c8838867964df30.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/home/georgi/AndroidStudioProjects/DashBoard/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/25.1.1/jars/classes.jar"
+        jar="D:\Coursera\DashBoard\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\25.1.1\jars\classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
         sha1="0fb891e8f0cfba0513043a7bb357513d229ca2cd">
-        <dex dex="/home/georgi/AndroidStudioProjects/DashBoard/app/build/intermediates/pre-dexed/debug/com.android.support-support-core-utils-25.1.1_f905f1a12412103754a69d2ed2d98e29b5f42407.jar" />
+        <dex dex="D:\Coursera\DashBoard\app\build\intermediates\pre-dexed\debug\com.android.support-support-core-utils-25.1.1_8e51bf91d77924ec3ac74a6e2aaa0594fe001813.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/home/georgi/AndroidStudioProjects/DashBoard/app/build/intermediates/exploded-aar/com.android.support/support-fragment/25.1.1/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="e2719c102dca3a7a5b02ce07f769362da6ddb4ab">
-        <dex dex="/home/georgi/AndroidStudioProjects/DashBoard/app/build/intermediates/pre-dexed/debug/com.android.support-support-fragment-25.1.1_28bd729e2d7ae6bf26d24b61fbf14802b066c762.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/georgi/AndroidStudioProjects/DashBoard/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/25.1.1/jars/classes.jar"
+        jar="D:\Coursera\DashBoard\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.1.1\jars\classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
         sha1="3e04ac8ca644ea7baddf6fdcf72e15c79e9df94a">
-        <dex dex="/home/georgi/AndroidStudioProjects/DashBoard/app/build/intermediates/pre-dexed/debug/com.android.support-support-core-ui-25.1.1_374018c59f02c20ec5edd22bb26b96e3232231e8.jar" />
+        <dex dex="D:\Coursera\DashBoard\app\build\intermediates\pre-dexed\debug\com.android.support-support-core-ui-25.1.1_6818d88354edfdbc6272e37249889f813576092e.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/home/georgi/AndroidStudioProjects/DashBoard/app/build/intermediates/exploded-aar/com.android.support/support-compat/25.1.1/jars/classes.jar"
+        jar="D:\Coursera\DashBoard\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\25.1.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="ecb496cc08dd52551fc5ec6db3bc0632e95a89bb">
+        <dex dex="D:\Coursera\DashBoard\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-25.1.1_9db6fc0b16dae89fc1fbb88cc2dffd0d8518ca13.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Coursera\DashBoard\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\25.1.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="0d191c1a09e4892d059e5ce749e4ad4e08129e35">
+        <dex dex="D:\Coursera\DashBoard\app\build\intermediates\pre-dexed\debug\com.android.support-animated-vector-drawable-25.1.1_b69843e3bdb589c70fc91b3f6d6b5876333a2ffb.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Sansarova\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\25.1.1\support-annotations-25.1.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="b59b6ee8d6ecc03e672d253800430343493a6ed8">
+        <dex dex="D:\Coursera\DashBoard\app\build\intermediates\pre-dexed\debug\support-annotations-25.1.1_53d6bc1520012db58214e84343ba3c6a589345c8.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Coursera\DashBoard\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\25.1.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="c03bf57f358aa10d253f21989e93bcf6014b3b17">
+        <dex dex="D:\Coursera\DashBoard\app\build\intermediates\pre-dexed\debug\com.android.support-support-vector-drawable-25.1.1_1123c969a9733c2bf9975b3fa90d7c3cbd80dd1b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Coursera\DashBoard\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.1.1\jars\classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
         sha1="02741d05d4b697fba5e279e9881aaa1da0ca7c7f">
-        <dex dex="/home/georgi/AndroidStudioProjects/DashBoard/app/build/intermediates/pre-dexed/debug/com.android.support-support-compat-25.1.1_487f0dc9d2237d3229c6a021553dd52bdb701e2f.jar" />
+        <dex dex="D:\Coursera\DashBoard\app\build\intermediates\pre-dexed\debug\com.android.support-support-compat-25.1.1_8b0854f7c9c1a4451d47ea312bb026097e3e5096.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Coursera\DashBoard\app\build\intermediates\exploded-aar\com.android.support\support-v4\25.1.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="D:\Coursera\DashBoard\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-25.1.1_7b86b8198de52c7ef09b67efce9cf57fe029ee20.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Coursera\DashBoard\app\build\intermediates\exploded-aar\com.android.support\support-fragment\25.1.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="e2719c102dca3a7a5b02ce07f769362da6ddb4ab">
+        <dex dex="D:\Coursera\DashBoard\app\build\intermediates\pre-dexed\debug\com.android.support-support-fragment-25.1.1_53269f99bdfb9a217f8cecd292c96a350d5d924c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Sansarova\.gradle\caches\modules-2\files-2.1\com.michaelpardo\activeandroid\3.1.0-SNAPSHOT\4ab7b0182975bc57c49efc5e0b3baa4a10e4ec08\activeandroid-3.1.0-SNAPSHOT.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="4ab7b0182975bc57c49efc5e0b3baa4a10e4ec08">
+        <dex dex="D:\Coursera\DashBoard\app\build\intermediates\pre-dexed\debug\activeandroid-3.1.0-SNAPSHOT_857a5a0448eedf25314875ce2dcaa4fe9eb47f8d.jar" />
     </item>
 
 </items>
