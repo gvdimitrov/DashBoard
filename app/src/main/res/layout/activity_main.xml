@@ -7,9 +7,9 @@
     android:layout_height="match_parent"
     android:paddingTop="3dp"
     android:background="#000000"
-    tools:context="com.vgdengineering.dashboard.MainActivity">
+    tools:context="com.vgdengineering.dashboard.ui.screen.MainActivity">
 
-    <com.vgdengineering.dashboard.CircularSeekBar
+    <com.vgdengineering.dashboard.ui.view.CircularSeekBar
         android:id="@+id/circularSeekBar1"
         android:layout_width="250dp"
         android:layout_height="250dp"
@@ -27,7 +27,7 @@
         app:pointer_color="#ce8d00"
         app:pointer_halo_color="#880174DF"/>
 
-    <com.vgdengineering.dashboard.CircularSeekBar
+    <com.vgdengineering.dashboard.ui.view.CircularSeekBar
         android:id="@+id/circularSeekBar2"
         android:layout_width="250dp"
         android:layout_height="250dp"
