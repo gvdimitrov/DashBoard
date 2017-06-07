@@ -8,8 +8,10 @@ import com.activeandroid.query.Select;
 import com.vgdengineering.dashboard.DashboardApplication;
 import com.vgdengineering.dashboard.database.entity.Climatronic;
 import com.vgdengineering.dashboard.database.entity.GearBox;
+import com.vgdengineering.dashboard.database.entity.Parktronik;
 import com.vgdengineering.dashboard.services.ServiceClimatronic;
 import com.vgdengineering.dashboard.services.ServiceGearBox;
+import com.vgdengineering.dashboard.services.ServiceParktronik;
 
 public class Dao implements IDao {
 
@@ -86,5 +88,26 @@ public class Dao implements IDao {
         }
         Log.e(TAG, "The Climatronic table is empty! ");
         return null;
+    }
+
+    @Override
+    public void saveParktronik(Parktronik parktronik) {
+        if(parktronik == null){
+            Log.e(TAG, "Parktronik is null, cannot save it");
+            return;
+        }
+        Context context = DashboardApplication.getAppContext();
+        Intent startService = new Intent(context, ServiceParktronik.class);
+        startService.putExtra(ServiceParktronik.PARKTRONIK, parktronik);
+        context.startService(startService);
+    }
+
+    @Override
+    public Parktronik getParktronik() {
+        Parktronik parktronik = new Select().from(Parktronik.class).executeSingle();
+        if(parktronik== null){
+            Log.d(TAG, "The Parktrnik table is empty");
+        }
+        return parktronik;
     }
 }
