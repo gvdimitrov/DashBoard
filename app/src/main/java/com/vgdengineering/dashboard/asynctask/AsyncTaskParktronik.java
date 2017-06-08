@@ -1,28 +1,14 @@
-package com.vgdengineering.dashboard.services;
+package com.vgdengineering.dashboard.asynctask;
 
-import android.app.IntentService;
-import android.content.Intent;
+import android.os.AsyncTask;
 import android.util.Log;
 
 import com.activeandroid.query.Select;
 import com.vgdengineering.dashboard.database.entity.Parktronik;
+import com.vgdengineering.dashboard.observables.ObservableDatabaseData;
 
-public class ServiceParktronik extends IntentService {
-    private static final String TAG = ServiceParktronik.class.getSimpleName();
-    public static final String PARKTRONIK = "PARKTRONIK";
-
-    public ServiceParktronik() {
-        super(TAG);
-    }
-
-    @Override
-    protected void onHandleIntent(Intent intent) {
-        Parktronik parktronik = null;
-        if(intent!= null){
-            parktronik = intent.getParcelableExtra(PARKTRONIK);
-        }
-        saveParktronik(parktronik);
-    }
+public class AsyncTaskParktronik extends AsyncTask<Parktronik, Void, Void> {
+    private static final String TAG = AsyncTaskParktronik.class.getSimpleName();
 
     private static void saveParktronik(Parktronik parktronik){
         if (parktronik == null) {
@@ -40,5 +26,16 @@ public class ServiceParktronik extends IntentService {
             Log.d(TAG, "old parktronik with new values: " + oldParktronik.toString());
             oldParktronik.save();
         }
+    }
+
+    @Override
+    protected Void doInBackground(Parktronik... params) {
+        saveParktronik(params[0]);
+        return null;
+    }
+
+    @Override
+    protected void onPostExecute(Void aVoid) {
+        ObservableDatabaseData.getInstance().notifyDateSetChange();
     }
 }

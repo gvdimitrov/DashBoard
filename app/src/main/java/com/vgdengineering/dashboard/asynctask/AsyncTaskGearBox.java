@@ -1,29 +1,15 @@
-package com.vgdengineering.dashboard.services;
+package com.vgdengineering.dashboard.asynctask;
 
-import android.app.IntentService;
-import android.content.Intent;
+import android.os.AsyncTask;
 import android.util.Log;
 
 import com.activeandroid.query.Select;
 import com.vgdengineering.dashboard.database.entity.GearBox;
+import com.vgdengineering.dashboard.observables.ObservableDatabaseData;
 
-public class ServiceGearBox extends IntentService {
+public class AsyncTaskGearBox extends AsyncTask<GearBox, Void, Void> {
 
-    private static final String TAG = ServiceGearBox.class.getSimpleName();
-    public static final String GEAR_BOX = "GEAR_BOX";
-
-    public ServiceGearBox() {
-        super(TAG);
-    }
-
-    @Override
-    protected void onHandleIntent(Intent intent) {
-        GearBox gearBox = null;
-        if (intent != null) {
-            gearBox = intent.getParcelableExtra(GEAR_BOX);
-        }
-        saveGearBox(gearBox);
-    }
+    private static final String TAG = AsyncTaskGearBox.class.getSimpleName();
 
     private void saveGearBox(GearBox gearBox) {
         if (gearBox == null) {
@@ -41,5 +27,16 @@ public class ServiceGearBox extends IntentService {
             Log.d(TAG, "old gear with new values: " + oldGearBox.toString());
             oldGearBox.save();
         }
+    }
+
+    @Override
+    protected Void doInBackground(GearBox... params) {
+        saveGearBox(params[0]);
+        return null;
+    }
+
+    @Override
+    protected void onPostExecute(Void aVoid) {
+        ObservableDatabaseData.getInstance().notifyDateSetChange();
     }
 }

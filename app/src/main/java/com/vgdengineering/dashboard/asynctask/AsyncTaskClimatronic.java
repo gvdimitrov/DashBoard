@@ -1,30 +1,14 @@
-package com.vgdengineering.dashboard.services;
+package com.vgdengineering.dashboard.asynctask;
 
-import android.app.IntentService;
-import android.content.Intent;
+import android.os.AsyncTask;
 import android.util.Log;
 
 import com.activeandroid.query.Select;
 import com.vgdengineering.dashboard.database.entity.Climatronic;
+import com.vgdengineering.dashboard.observables.ObservableDatabaseData;
 
-public class ServiceClimatronic extends IntentService {
-    private static final String TAG = ServiceGearBox.class.getSimpleName();
-    public static final String CLIMATRONIC = "CLIMATRONIC";
-
-
-    public ServiceClimatronic() {
-        super(TAG);
-    }
-
-    @Override
-    protected void onHandleIntent(Intent intent) {
-        Climatronic climatronic = null;
-        if (intent != null) {
-            climatronic = intent.getParcelableExtra(CLIMATRONIC);
-        }
-
-        saveClimatronic(climatronic);
-    }
+public class AsyncTaskClimatronic extends AsyncTask<Climatronic, Void, Void> {
+    private static final String TAG = AsyncTaskGearBox.class.getSimpleName();
 
     private static void saveClimatronic(Climatronic climatronic) {
         if (climatronic == null) {
@@ -43,5 +27,16 @@ public class ServiceClimatronic extends IntentService {
             Log.d(TAG, "old climatronic with new values: " + oldClimatronic.toString());
             oldClimatronic.save();
         }
+    }
+
+    @Override
+    protected Void doInBackground(Climatronic... params) {
+        saveClimatronic(params[0]);
+        return null;
+    }
+
+    @Override
+    protected void onPostExecute(Void aVoid) {
+        ObservableDatabaseData.getInstance().notifyDateSetChange();
     }
 }

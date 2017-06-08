@@ -1,17 +1,14 @@
 package com.vgdengineering.dashboard.database.communication;
 
-import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 
 import com.activeandroid.query.Select;
-import com.vgdengineering.dashboard.DashboardApplication;
 import com.vgdengineering.dashboard.database.entity.Climatronic;
 import com.vgdengineering.dashboard.database.entity.GearBox;
 import com.vgdengineering.dashboard.database.entity.Parktronik;
-import com.vgdengineering.dashboard.services.ServiceClimatronic;
-import com.vgdengineering.dashboard.services.ServiceGearBox;
-import com.vgdengineering.dashboard.services.ServiceParktronik;
+import com.vgdengineering.dashboard.asynctask.AsyncTaskClimatronic;
+import com.vgdengineering.dashboard.asynctask.AsyncTaskGearBox;
+import com.vgdengineering.dashboard.asynctask.AsyncTaskParktronik;
 
 public class Dao implements IDao {
 
@@ -52,10 +49,7 @@ public class Dao implements IDao {
             Log.e(TAG, "gear box is null");
             return;
         }
-        Context context = DashboardApplication.getAppContext();
-        Intent startService = new Intent(context, ServiceGearBox.class);
-        startService.putExtra(ServiceGearBox.GEAR_BOX, gearBox);
-        context.startService(startService);
+        new AsyncTaskGearBox().execute(gearBox);
     }
 
     @Override
@@ -74,10 +68,7 @@ public class Dao implements IDao {
             Log.e(TAG, "climatronic is null");
             return;
         }
-        Context context = DashboardApplication.getAppContext();
-        Intent startService = new Intent(context, ServiceClimatronic.class);
-        startService.putExtra(ServiceClimatronic.CLIMATRONIC, climatronic);
-        context.startService(startService);
+        new AsyncTaskClimatronic().execute(climatronic);
     }
 
     @Override
@@ -96,10 +87,7 @@ public class Dao implements IDao {
             Log.e(TAG, "Parktronik is null, cannot save it");
             return;
         }
-        Context context = DashboardApplication.getAppContext();
-        Intent startService = new Intent(context, ServiceParktronik.class);
-        startService.putExtra(ServiceParktronik.PARKTRONIK, parktronik);
-        context.startService(startService);
+        new AsyncTaskParktronik().execute(parktronik);
     }
 
     @Override
@@ -110,4 +98,17 @@ public class Dao implements IDao {
         }
         return parktronik;
     }
+
+    public static void createDummyData(){
+//        if(instance.getClimatronic() == null){
+            instance.saveClimatronic(new Climatronic(28,21,3));
+//        }
+//        if(instance.getParktronik() == null){
+            instance.saveParktronik(new Parktronik(0,2));
+//        }
+//        if(instance.getGearBox() == null){
+            instance.saveGearBox(new GearBox(2,3));
+//        }
+    }
+
 }

@@ -94,7 +94,7 @@
         android:layout_height="15dp"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="190dp"
-        android:id="@+id/rled5"
+        android:id="@+id/txtrled5"
         android:background="@drawable/led2"/>
 
     <TextView
@@ -102,7 +102,7 @@
         android:layout_height="15dp"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="210dp"
-        android:id="@+id/rled4"
+        android:id="@+id/txtrled4"
         android:background="@drawable/led2"/>
 
     <TextView
@@ -110,7 +110,7 @@
         android:layout_height="15dp"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="230dp"
-        android:id="@+id/rled3"
+        android:id="@+id/txtrled3"
         android:background="@drawable/led1"/>
 
     <TextView
@@ -118,7 +118,7 @@
         android:layout_height="15dp"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="250dp"
-        android:id="@+id/rled2"
+        android:id="@+id/txtrled2"
         android:background="@drawable/led1"/>
 
     <TextView
@@ -126,7 +126,7 @@
         android:layout_height="15dp"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="270dp"
-        android:id="@+id/rled1"
+        android:id="@+id/txtrled1"
         android:background="@drawable/led1"/>
 
     <ImageView
@@ -141,7 +141,7 @@
         android:layout_height="15dp"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="375dp"
-        android:id="@+id/dled1"
+        android:id="@+id/txtdled1"
         android:background="@drawable/led1"/>
 
     <TextView
@@ -149,7 +149,7 @@
         android:layout_height="15dp"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="395dp"
-        android:id="@+id/dled2"
+        android:id="@+id/txtdled2"
         android:background="@drawable/led1"/>
 
     <TextView
@@ -157,7 +157,7 @@
         android:layout_height="15dp"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="415dp"
-        android:id="@+id/dled3"
+        android:id="@+id/txtdled3"
         android:background="@drawable/led1"/>
 
     <TextView
@@ -165,7 +165,7 @@
         android:layout_height="15dp"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="435dp"
-        android:id="@+id/dled4"
+        android:id="@+id/txtdled4"
         android:background="@drawable/led2"/>
 
     <TextView
@@ -173,7 +173,7 @@
         android:layout_height="15dp"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="455dp"
-        android:id="@+id/dled5"
+        android:id="@+id/txtdled5"
         android:background="@drawable/led2"/>
 
     <ImageView
@@ -181,7 +181,8 @@
         android:layout_height="60dp"
         app:srcCompat="@drawable/leftarrow"
         android:layout_marginTop="-10dp"
-        android:layout_marginLeft="15dp"/>
+        android:layout_marginLeft="15dp"
+        android:id="@+id/imageView" />
 
     <ImageView
         android:layout_width="60dp"
@@ -189,6 +190,162 @@
         app:srcCompat="@drawable/rightarrow"
         android:layout_marginTop="-10dp"
         android:layout_marginLeft="570dp"/>
+
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:srcCompat="@drawable/highbeams"
+        android:layout_marginTop="60dp"
+        android:layout_marginLeft="345dp"/>
+
+    <ImageView
+        android:layout_width="110dp"
+        android:layout_height="75dp"
+        app:srcCompat="@drawable/lowbeams"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="240dp"
+        android:scaleType="fitXY"/>
+
+    <TextView
+        android:text="2000 km"
+        android:layout_width="90dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="220dp"
+        android:layout_marginLeft="250dp"
+        android:id="@+id/txtDistance"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:textColor="#ffff00"
+        android:textSize="20dp"
+        android:background="#606060"/>
+
+    <TextClock
+        android:layout_width="60dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="220dp"
+        android:layout_marginLeft="340dp"
+        android:id="@+id/textClock"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:textColor="#ffff00"
+        android:textSize="20dp"
+        android:background="#606060"
+        android:format12Hour="k:mm"/>
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        app:srcCompat="@drawable/seatbealts1"
+        android:layout_marginTop="280dp"
+        android:layout_marginLeft="10dp"
+        android:scaleType="fitXY"/>
+
+    <TextView
+        android:text="24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="280dp"
+        android:layout_marginLeft="550dp"
+        android:id="@+id/txtoutsideTemp"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:textColor="#ffffff"
+        android:textSize="45dp"
+        android:background="#000000"/>
+
+    <TextView
+        android:text="°C"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="290dp"
+        android:layout_marginLeft="600dp"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:textColor="#ffffff"
+        android:textSize="35dp"
+        android:background="#000000"/>
+
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="60dp"
+        app:srcCompat="@drawable/thermometer"
+        android:layout_marginTop="280dp"
+        android:layout_marginLeft="140dp"
+        android:scaleType="fitXY"/>
+
+    <TextView
+        android:text="24"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="280dp"
+        android:layout_marginLeft="200dp"
+        android:id="@+id/txtTemp"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:textColor="#ffff00"
+        android:textSize="45dp"
+        android:background="#606060"/>
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        app:srcCompat="@drawable/fan"
+        android:layout_marginTop="280dp"
+        android:layout_marginLeft="320dp"
+        android:scaleType="fitXY"/>
+
+    <TextView
+        android:text="5"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="280dp"
+        android:layout_marginLeft="390dp"
+        android:id="@+id/txtfan"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:textColor="#ffff00"
+        android:textSize="45dp"
+        android:background="#606060"/>
+
+    <TextView
+        android:text="3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="130dp"
+        android:layout_marginLeft="265dp"
+        android:id="@+id/txtgear"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:textColor="#ffffff"
+        android:textSize="45dp"
+        android:background="#000000"/>
+
+    <TextView
+        android:text="->"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="130dp"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:textColor="#ffffff"
+        android:textSize="45dp"
+        android:background="#000000"/>
+
+    <TextView
+        android:text="4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="130dp"
+        android:layout_marginLeft="350dp"
+        android:id="@+id/txtnextGear"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:textColor="#ffffff"
+        android:textSize="45dp"
+        android:background="#000000"/>
 
 
 </RelativeLayout>
