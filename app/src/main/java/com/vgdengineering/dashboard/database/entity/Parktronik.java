@@ -8,6 +8,8 @@ import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 
+import java.security.InvalidParameterException;
+
 @Table(name = "parktronik")
 public class Parktronik extends Model implements Parcelable {
 
@@ -27,7 +29,7 @@ public class Parktronik extends Model implements Parcelable {
         if (isValueValid(front)) {
             this.front = front;
         } else {
-            Log.e(TAG, "The front value is out of range -> " + front);
+            Log.e(TAG, "The front value is out of range -> " + front, new InvalidParameterException());
             front = 0;
         }
     }
@@ -40,7 +42,7 @@ public class Parktronik extends Model implements Parcelable {
         if(isValueValid(rear)) {
             this.rear = rear;
         }else{
-            Log.e(TAG, "The rear value is out of range -> " + rear);
+            Log.e(TAG, "The rear value is out of range -> " + rear, new InvalidParameterException());
             rear = 0;
         }
     }

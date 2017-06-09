@@ -2,13 +2,18 @@ package com.vgdengineering.dashboard.database.entity;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 
+import java.security.InvalidParameterException;
+
 @Table(name = "gear_box")
 public class GearBox extends Model implements Parcelable {
+    private static final String TAG = GearBox.class.getSimpleName();
+    private static final int NEUTRAL = 0;
 
     @Column(name = "current_gear")
     private int currentGear;
@@ -20,10 +25,11 @@ public class GearBox extends Model implements Parcelable {
     }
 
     public void setCurrentGear(int currentGear) {
-        if (currentGear > 1) {
+        if (currentGear >= -1 && currentGear <= 6) {
             this.currentGear = currentGear;
         } else {
-            this.currentGear = 1;
+            Log.e(TAG, "currentGear: " + currentGear, new InvalidParameterException());
+            this.currentGear = NEUTRAL;
         }
     }
 
@@ -32,10 +38,11 @@ public class GearBox extends Model implements Parcelable {
     }
 
     public void setNextGear(int nextGear) {
-        if (nextGear > 1) {
+        if (nextGear >= -1 && nextGear <= 6) {
             this.nextGear = nextGear;
         } else {
-            this.nextGear = 1;
+            Log.e(TAG, "nextGear: " + nextGear, new InvalidParameterException());
+            this.nextGear = NEUTRAL;
         }
     }
 
@@ -44,7 +51,8 @@ public class GearBox extends Model implements Parcelable {
         setNextGear(nextGear);
     }
 
-    public GearBox(){}
+    public GearBox() {
+    }
 
     @Override
     public String toString() {

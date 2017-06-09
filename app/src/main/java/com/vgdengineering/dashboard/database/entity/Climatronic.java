@@ -2,13 +2,17 @@ package com.vgdengineering.dashboard.database.entity;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 
+import java.security.InvalidParameterException;
+
 @Table(name = "climatronic")
 public class Climatronic extends Model implements Parcelable {
+    private static final String TAG = Climatronic.class.getSimpleName();
     @Column(name = "current_degrees")
     private int currentDegrees;
     @Column(name = "desired_degrees")
@@ -28,6 +32,7 @@ public class Climatronic extends Model implements Parcelable {
         if (blowerPower >= 1 && blowerPower <= 8) {
             this.blowerPower = blowerPower;
         } else {
+            Log.e(TAG, "blowerPower: "+blowerPower, new InvalidParameterException());
             blowerPower = 1;
         }
     }
