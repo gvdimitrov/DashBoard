@@ -72,15 +72,14 @@ public class BeltsWarning extends Model implements Parcelable {
 
         public static String getPriorityName(int id){
             if(id<1){
-                return "";
+                return LOW_;
             }
             for(Priority p: values()){
                 if(p.id == id){
                     return p.priority;
                 }
             }
-
-            return "";
+            return LOW_;
         }
 
         public String getPriority() {

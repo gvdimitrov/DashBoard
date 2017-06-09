@@ -3,11 +3,16 @@ package com.vgdengineering.dashboard.ui.screen;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.vgdengineering.dashboard.R;
 import com.vgdengineering.dashboard.database.communication.Dao;
 import com.vgdengineering.dashboard.database.communication.IDao;
+import com.vgdengineering.dashboard.database.entity.BeltsWarning;
 import com.vgdengineering.dashboard.database.entity.Climatronic;
 import com.vgdengineering.dashboard.database.entity.GearBox;
 import com.vgdengineering.dashboard.database.entity.Parktronik;
@@ -22,9 +27,12 @@ public class MainActivity extends AppCompatActivity implements Observer {
 
     private int rpm = 0;
     private int speed = 0;
-    private int carTemp = 0, outTemp = 0, fan = 0;
-    private int gear = 0, nextGear = 0;
+    private int carTemp, outTemp, fan = 1;
+    private int gear, nextGear;
     private int frontsensor = 0, backsensor = 0;
+    private boolean beltsSensor;
+    private String beltsSeverity;
+    private boolean flag1 = false,flag2 = false,flag3 = false,flag4 = false,flag5 = false,flag6 = false,flagR = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,42 +46,358 @@ public class MainActivity extends AppCompatActivity implements Observer {
         ObservableDatabaseData.getInstance().addObserver(this);
         Dao.createDummyData();
 
-        rpm = 2000;
-        CircularSeekBar seekbar = (CircularSeekBar) findViewById(R.id.circularSeekBar1);
-        seekbar.setProgress(rpm);
-        TextView txt = (TextView) findViewById(R.id.rpm);
-        txt.setText(Integer.toString(rpm));
-        seekbar.setOnSeekBarChangeListener(new CircleSeekBarListener());
+        Thread t1 = new Thread() {
 
-        speed = 100;
-        CircularSeekBar seekbar1 = (CircularSeekBar) findViewById(R.id.circularSeekBar2);
-        seekbar1.setProgress(speed);
-        TextView txt1 = (TextView) findViewById(R.id.speed);
-        txt1.setText(Integer.toString(speed));
-        seekbar1.setOnSeekBarChangeListener(new CircleSeekBarListener());
+            @Override
+            public void run() {
+                try {
+                    while (!isInterrupted()) {
+                        Thread.sleep(100);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                updateSpeed();
+                            }
+                        });
+                    }
+                } catch (InterruptedException e) {
+                }
+            }
+        };
 
-//        Thread t = new Thread() {
-//
-//            @Override
-//            public void run() {
-//                try {
-//                    while (!isInterrupted()) {
-//                        Thread.sleep(500);
-//                        runOnUiThread(new Runnable() {
-//                            @Override
-//                            public void run() {
-//                                updateClimatronic();
-//                                updateParktronic();
-//                                updateGear();
-//                            }
-//                        });
-//                    }
-//                } catch (InterruptedException e) {
-//                }
-//            }
-//        };
-//
-//        t.start();
+        t1.start();
+    }
+
+    public void updateSpeed()
+    {
+        if (gear ==0)
+        {
+            rpm = 800;
+            speed = 0;
+
+            com.vgdengineering.dashboard.ui.view.CircularSeekBar seekbar = (com.vgdengineering.dashboard.ui.view.CircularSeekBar) findViewById(R.id.circularSeekBar1);
+            seekbar.setProgress(rpm);
+            TextView txt = (TextView) findViewById(R.id.rpm);
+            txt.setText(Integer.toString(rpm));
+
+            com.vgdengineering.dashboard.ui.view.CircularSeekBar seekbar1 = (com.vgdengineering.dashboard.ui.view.CircularSeekBar) findViewById(R.id.circularSeekBar2);
+            seekbar1.setProgress(speed);
+            TextView txt1 = (TextView) findViewById(R.id.speed);
+            txt1.setText(Integer.toString(speed));
+        }
+
+        else if(gear == 1)
+        {
+            flag2 = false;
+            flag3 = false;
+            flag4 = false;
+            flag5 = false;
+            flag6 = false;
+            flagR = false;
+            if(flag1 == false)
+            {
+                rpm = 800;
+                speed = 0;
+                flag1 = true;
+            }
+
+            com.vgdengineering.dashboard.ui.view.CircularSeekBar seekbar = (com.vgdengineering.dashboard.ui.view.CircularSeekBar) findViewById(R.id.circularSeekBar1);
+            seekbar.setProgress(rpm);
+            TextView txt = (TextView) findViewById(R.id.rpm);
+            txt.setText(Integer.toString(rpm));
+
+            com.vgdengineering.dashboard.ui.view.CircularSeekBar seekbar1 = (com.vgdengineering.dashboard.ui.view.CircularSeekBar) findViewById(R.id.circularSeekBar2);
+            seekbar1.setProgress(speed);
+            TextView txt1 = (TextView) findViewById(R.id.speed);
+            txt1.setText(Integer.toString(speed));
+
+            if (rpm <= 2000)
+            {
+
+                rpm = rpm + 40;
+                speed = speed + 1;
+
+                seekbar.setProgress(rpm);
+                txt.setText(Integer.toString(rpm));
+
+                seekbar1.setProgress(speed);
+                txt1.setText(Integer.toString(speed));
+            }
+
+
+        }
+
+        else if(gear == 2)
+        {
+            flag1 = false;
+            flag3 = false;
+            flag4 = false;
+            flag5 = false;
+            flag6 = false;
+            flagR = false;
+            if(flag2 == false)
+            {
+                rpm = 1000;
+                speed = 28;
+                flag2 = true;
+
+            }
+
+            com.vgdengineering.dashboard.ui.view.CircularSeekBar seekbar = (com.vgdengineering.dashboard.ui.view.CircularSeekBar) findViewById(R.id.circularSeekBar1);
+            seekbar.setProgress(rpm);
+            TextView txt = (TextView) findViewById(R.id.rpm);
+            txt.setText(Integer.toString(rpm));
+
+            com.vgdengineering.dashboard.ui.view.CircularSeekBar seekbar1 = (com.vgdengineering.dashboard.ui.view.CircularSeekBar) findViewById(R.id.circularSeekBar2);
+            seekbar1.setProgress(speed);
+            TextView txt1 = (TextView) findViewById(R.id.speed);
+            txt1.setText(Integer.toString(speed));
+
+            if (rpm <= 2600)
+            {
+                rpm = rpm + 40;
+                speed = speed + 1;
+
+                seekbar.setProgress(rpm);
+                txt.setText(Integer.toString(rpm));
+
+                seekbar1.setProgress(speed);
+                txt1.setText(Integer.toString(speed));
+            }
+
+        }
+
+        else if(gear == 3)
+        {
+            flag1 = false;
+            flag2 = false;
+            flag4 = false;
+            flag5 = false;
+            flag6 = false;
+            flagR = false;
+            if(flag3 == false)
+            {
+                rpm = 1200;
+                speed = 68;
+                flag3 = true;
+
+            }
+
+            com.vgdengineering.dashboard.ui.view.CircularSeekBar seekbar = (com.vgdengineering.dashboard.ui.view.CircularSeekBar) findViewById(R.id.circularSeekBar1);
+            seekbar.setProgress(rpm);
+            TextView txt = (TextView) findViewById(R.id.rpm);
+            txt.setText(Integer.toString(rpm));
+
+            com.vgdengineering.dashboard.ui.view.CircularSeekBar seekbar1 = (com.vgdengineering.dashboard.ui.view.CircularSeekBar) findViewById(R.id.circularSeekBar2);
+            seekbar1.setProgress(speed);
+            TextView txt1 = (TextView) findViewById(R.id.speed);
+            txt1.setText(Integer.toString(speed));
+
+            if (rpm <= 3200)
+            {
+                rpm = rpm + 40;
+                speed = speed + 1;
+
+                seekbar.setProgress(rpm);
+                txt.setText(Integer.toString(rpm));
+
+                seekbar1.setProgress(speed);
+                txt1.setText(Integer.toString(speed));
+            }
+
+        }
+
+        else if(gear == 4)
+        {
+            flag1 = false;
+            flag2 = false;
+            flag3 = false;
+            flag5 = false;
+            flag6 = false;
+            flagR = false;
+            if(flag4 == false)
+            {
+                rpm = 1200;
+                speed = 115;
+                flag4 = true;
+
+            }
+
+            com.vgdengineering.dashboard.ui.view.CircularSeekBar seekbar = (com.vgdengineering.dashboard.ui.view.CircularSeekBar) findViewById(R.id.circularSeekBar1);
+            seekbar.setProgress(rpm);
+            TextView txt = (TextView) findViewById(R.id.rpm);
+            txt.setText(Integer.toString(rpm));
+
+            com.vgdengineering.dashboard.ui.view.CircularSeekBar seekbar1 = (com.vgdengineering.dashboard.ui.view.CircularSeekBar) findViewById(R.id.circularSeekBar2);
+            seekbar1.setProgress(speed);
+            TextView txt1 = (TextView) findViewById(R.id.speed);
+            txt1.setText(Integer.toString(speed));
+
+            if (rpm <= 3200)
+            {
+                rpm = rpm + 40;
+                speed = speed + 1;
+
+                seekbar.setProgress(rpm);
+                txt.setText(Integer.toString(rpm));
+
+                seekbar1.setProgress(speed);
+                txt1.setText(Integer.toString(speed));
+            }
+
+        }
+
+        else if(gear == 5)
+        {
+            flag1 = false;
+            flag2 = false;
+            flag3 = false;
+            flag4 = false;
+            flag6 = false;
+            flagR = false;
+            if(flag5 == false)
+            {
+                rpm = 1400;
+                speed = 168;
+                flag5 = true;
+
+            }
+
+
+            com.vgdengineering.dashboard.ui.view.CircularSeekBar seekbar = (com.vgdengineering.dashboard.ui.view.CircularSeekBar) findViewById(R.id.circularSeekBar1);
+            seekbar.setProgress(rpm);
+            TextView txt = (TextView) findViewById(R.id.rpm);
+            txt.setText(Integer.toString(rpm));
+
+            com.vgdengineering.dashboard.ui.view.CircularSeekBar seekbar1 = (com.vgdengineering.dashboard.ui.view.CircularSeekBar) findViewById(R.id.circularSeekBar2);
+            seekbar1.setProgress(speed);
+            TextView txt1 = (TextView) findViewById(R.id.speed);
+            txt1.setText(Integer.toString(speed));
+
+            if (rpm <= 3800)
+            {
+                rpm = rpm + 40;
+                speed = speed + 1;
+
+                seekbar.setProgress(rpm);
+                txt.setText(Integer.toString(rpm));
+
+                seekbar1.setProgress(speed);
+                txt1.setText(Integer.toString(speed));
+            }
+
+        }
+
+        else if(gear == 6)
+        {
+            flag1 = false;
+            flag2 = false;
+            flag3 = false;
+            flag4 = false;
+            flag5 = false;
+            flagR = false;
+            if(flag6 == false)
+            {
+                rpm = 1400;
+                speed = 220;
+                flag6 = true;
+
+            }
+
+            com.vgdengineering.dashboard.ui.view.CircularSeekBar seekbar = (com.vgdengineering.dashboard.ui.view.CircularSeekBar) findViewById(R.id.circularSeekBar1);
+            seekbar.setProgress(rpm);
+            TextView txt = (TextView) findViewById(R.id.rpm);
+            txt.setText(Integer.toString(rpm));
+
+            com.vgdengineering.dashboard.ui.view.CircularSeekBar seekbar1 = (com.vgdengineering.dashboard.ui.view.CircularSeekBar) findViewById(R.id.circularSeekBar2);
+            seekbar1.setProgress(speed);
+            TextView txt1 = (TextView) findViewById(R.id.speed);
+            txt1.setText(Integer.toString(speed));
+
+            if (rpm <= 1600)
+            {
+                rpm = rpm + 40;
+                speed = speed + 2;
+
+                seekbar.setProgress(rpm);
+                txt.setText(Integer.toString(rpm));
+
+                seekbar1.setProgress(speed);
+                txt1.setText(Integer.toString(speed));
+            }
+
+        }
+
+        else if(gear == -1)
+        {
+            flag1 = false;
+            flag2 = false;
+            flag3 = false;
+            flag4 = false;
+            flag5 = false;
+            flag6 = false;
+            if(flagR == false)
+            {
+                rpm = 800;
+                speed = 0;
+                flagR = true;
+
+            }
+
+            com.vgdengineering.dashboard.ui.view.CircularSeekBar seekbar = (com.vgdengineering.dashboard.ui.view.CircularSeekBar) findViewById(R.id.circularSeekBar1);
+            seekbar.setProgress(rpm);
+            TextView txt = (TextView) findViewById(R.id.rpm);
+            txt.setText(Integer.toString(rpm));
+
+            com.vgdengineering.dashboard.ui.view.CircularSeekBar seekbar1 = (com.vgdengineering.dashboard.ui.view.CircularSeekBar) findViewById(R.id.circularSeekBar2);
+            seekbar1.setProgress(speed);
+            TextView txt1 = (TextView) findViewById(R.id.speed);
+            txt1.setText(Integer.toString(speed));
+
+            if (rpm <= 1200)
+            {
+                rpm = rpm + 40;
+                speed = speed + 1;
+
+                seekbar.setProgress(rpm);
+                txt.setText(Integer.toString(rpm));
+
+                seekbar1.setProgress(speed);
+                txt1.setText(Integer.toString(speed));
+            }
+
+        }
+    }
+
+    public void updateSeatBelt()
+    {
+        ImageView imgBelt = (ImageView) findViewById(R.id.seatbelts1);
+
+        if(beltsSensor == true){
+
+
+            if(beltsSeverity.equals("high")){
+                final Animation animation = new AlphaAnimation((float) 1, 0); // Change alpha from fully visible to invisible
+                animation.setDuration(250); // duration - half a second
+                animation.setInterpolator(new LinearInterpolator()); // do not alter
+                // animation
+                // rate
+                animation.setRepeatCount(Animation.INFINITE); // Repeat animation
+                // infinitely
+                animation.setRepeatMode(Animation.REVERSE); // Reverse animation at the
+                // end so the button will
+                // fade back in
+                imgBelt.startAnimation(animation);
+
+            }
+            else if(beltsSeverity.equals("low")){
+                imgBelt.setVisibility(View.VISIBLE);
+            }
+
+        }else {
+            imgBelt.setVisibility(View.GONE);
+        }
+
     }
 
     public void updateClimatronic() {
@@ -92,6 +416,16 @@ public class MainActivity extends AppCompatActivity implements Observer {
 
         currentgear1.setText(Integer.toString(gear));
         nextgear1.setText(Integer.toString(nextGear));
+
+        if(gear == (-1))
+        {
+            currentgear1.setText("R");
+        }
+
+        if(nextGear == (-1))
+        {
+            nextgear1.setText("R");
+        }
     }
 
     public void updateParktronic() {
@@ -202,9 +536,14 @@ public class MainActivity extends AppCompatActivity implements Observer {
         frontsensor = parking1.getFront();
         backsensor = parking1.getRear();
 
+        BeltsWarning belts1 = dao.getBeltsWarning();
+        beltsSensor = belts1.isWarningForSeatBelt();
+        beltsSeverity = belts1.getWarningSeverity();
+
         updateClimatronic();
         updateParktronic();
         updateGear();
+        updateSeatBelt();
     }
 
     public class CircleSeekBarListener implements CircularSeekBar.OnCircularSeekBarChangeListener {
@@ -226,3 +565,4 @@ public class MainActivity extends AppCompatActivity implements Observer {
     }
 
 }
+
