@@ -3,6 +3,8 @@ package com.vgdengineering.dashboard.database.communication;
 import android.util.Log;
 
 import com.activeandroid.query.Select;
+import com.vgdengineering.dashboard.asynctask.AsyncTaskBeltsWarning;
+import com.vgdengineering.dashboard.database.entity.BeltsWarning;
 import com.vgdengineering.dashboard.database.entity.Climatronic;
 import com.vgdengineering.dashboard.database.entity.GearBox;
 import com.vgdengineering.dashboard.database.entity.Parktronik;
@@ -94,9 +96,27 @@ public class Dao implements IDao {
     public Parktronik getParktronik() {
         Parktronik parktronik = new Select().from(Parktronik.class).executeSingle();
         if(parktronik== null){
-            Log.d(TAG, "The Parktrnik table is empty");
+            Log.e(TAG, "The Parktronik table is empty");
         }
         return parktronik;
+    }
+
+    @Override
+    public void saveBeltWarning(BeltsWarning beltsWarning) {
+        if(beltsWarning == null){
+            Log.e(TAG, "BeltsWarning is null, cannot save it");
+            return;
+        }
+        new AsyncTaskBeltsWarning().execute(beltsWarning);
+    }
+
+    @Override
+    public BeltsWarning getBeltsWarning() {
+        BeltsWarning beltsWarning = new Select().from(BeltsWarning.class).executeSingle();
+        if(getParktronik() == null){
+            Log.e(TAG, "The BeltsWarning is empty");
+        }
+        return beltsWarning;
     }
 
     public static void createDummyData(){
@@ -109,6 +129,7 @@ public class Dao implements IDao {
 //        if(instance.getGearBox() == null){
             instance.saveGearBox(new GearBox(2,3));
 //        }
+        instance.saveBeltWarning(new BeltsWarning(true, BeltsWarning.Priority.HIGH.getPriority()));
     }
 
 }
