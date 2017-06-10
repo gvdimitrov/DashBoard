@@ -9,40 +9,50 @@ import com.activeandroid.Model;
 
 public class Headlights extends Model implements Parcelable {
 
-    private Light highBeams;
-    private Light lowBeams;
-    private Light fogLight;
+    private boolean highBeams;
+    private boolean lowBeams;
+    private boolean fogLight;
 
     public Headlights() {}
 
-    public Headlights(Light highBeams, Light lowBeams, Light fogLight) {
+    public Headlights(boolean highBeams, boolean lowBeams, boolean fogLight) {
         this.highBeams = highBeams;
         this.lowBeams = lowBeams;
         this.fogLight = fogLight;
     }
 
-    public Light getHighBeams() {
+    public boolean getHighBeams() {
         return highBeams;
     }
 
-    public void setHighBeams(Light highBeams) {
+    public void setHighBeams(boolean highBeams) {
         this.highBeams = highBeams;
     }
 
-    public Light getLowBeams() {
+    public boolean getLowBeams() {
         return lowBeams;
     }
 
-    public void setLowBeams(Light lowBeams) {
+    public void setLowBeams(boolean lowBeams) {
         this.lowBeams = lowBeams;
     }
 
-    public Light getFogLight() {
+    public boolean getFogLight() {
         return fogLight;
     }
 
-    public void setFogLight(Light fogLight) {
+    public void setFogLight(boolean fogLight) {
         this.fogLight = fogLight;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Headlights{" +
+                "highBeams=" + highBeams +
+                ", lowBeams=" + lowBeams +
+                ", fogLight=" + fogLight +
+                '}';
     }
 
     @Override
@@ -52,18 +62,18 @@ public class Headlights extends Model implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeParcelable(this.highBeams, flags);
-        dest.writeParcelable(this.lowBeams, flags);
-        dest.writeParcelable(this.fogLight, flags);
+        dest.writeByte(this.highBeams ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.lowBeams ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.fogLight ? (byte) 1 : (byte) 0);
     }
 
     protected Headlights(Parcel in) {
-        this.highBeams = in.readParcelable(Light.class.getClassLoader());
-        this.lowBeams = in.readParcelable(Light.class.getClassLoader());
-        this.fogLight = in.readParcelable(Light.class.getClassLoader());
+        this.highBeams = in.readByte() != 0;
+        this.lowBeams = in.readByte() != 0;
+        this.fogLight = in.readByte() != 0;
     }
 
-    public static final Parcelable.Creator<Headlights> CREATOR = new Parcelable.Creator<Headlights>() {
+    public static final Creator<Headlights> CREATOR = new Creator<Headlights>() {
         @Override
         public Headlights createFromParcel(Parcel source) {
             return new Headlights(source);
@@ -74,13 +84,4 @@ public class Headlights extends Model implements Parcelable {
             return new Headlights[size];
         }
     };
-
-    @Override
-    public String toString() {
-        return "Headlights{" +
-                "highBeams=" + highBeams +
-                ", lowBeams=" + lowBeams +
-                ", fogLight=" + fogLight +
-                '}';
-    }
 }

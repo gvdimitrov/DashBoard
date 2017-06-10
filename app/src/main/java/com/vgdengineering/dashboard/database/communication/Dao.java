@@ -178,7 +178,7 @@ public class Dao implements IDao {
         }
 
         if(instance.getHeadlights() == null) {
-            instance.saveHeadlight(new Headlights(new Light(true, 2), new Light(false, 1), new Light(true, 5)));
+            instance.saveHeadlight(new Headlights(true, false, true));
         }
 
         if(instance.getTripComputer() == null) {
