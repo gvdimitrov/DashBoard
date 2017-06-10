@@ -21,34 +21,27 @@ while(1)
             low_beams_on => "false",
             high_beams_on => "false",
             fog_light_on => "false",
-            low_beams_level => 1,
-            high_beams_level => 1,
-            fog_light_level => 1,
         };
 
         if($rand == 0)
         {
             $$values{low_beams_on} = "true";
-            $$values{low_beams_level} = 1;
         }
         elsif($rand == 1)
         {
             $$values{high_beams_on} = "true";
-            $$values{high_beams_level} = 2;
         }
         elsif($rand == 2)
         {
             $$values{low_beams_on} = "true";
-            $$values{low_beams_level} = 3;
             $$values{fog_light_on} = "true";
-            $$values{fog_light_level} = 1;
         }
         else
         {
             #Keeep default
         }   
     
-        `curl -H 'Content-Type: application/json' -X POST -d '{"moduleName":"headlights","value":{"highBeams":{"isOn":$$values{high_beams_on},"level":$$values{high_beams_level}},"lowBeams":{"isOn":$$values{low_beams_on},"level":$$values{low_beams_level}},"fogLight":{"isOn":$$values{fog_light_on},"level":$$values{fog_light_level}}}}' $url`;
+        `curl -H 'Content-Type: application/json' -X POST -d '{"moduleName":"headlights","value":{"highBeams":$$values{high_beams_on},"lowBeams":$$values{low_beams_on},"fogLight":$$values{fog_light_on}}}' $url`;
 
     }
 

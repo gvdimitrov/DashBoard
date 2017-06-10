@@ -17,6 +17,7 @@ import com.vgdengineering.dashboard.database.communication.Dao;
 import com.vgdengineering.dashboard.database.entity.BeltsWarning;
 import com.vgdengineering.dashboard.database.entity.Climatronic;
 import com.vgdengineering.dashboard.database.entity.GearBox;
+import com.vgdengineering.dashboard.database.entity.Headlights;
 import com.vgdengineering.dashboard.database.entity.Parktronik;
 import com.vgdengineering.dashboard.database.entity.TripComputer;
 
@@ -60,7 +61,13 @@ public class AsyncTaskCommunication extends AsyncTask<Void, Void, Void>{
                                     Dao.getInstance().saveBeltWarning(bw);
                                     break;
                                 }
-                                case "headlights" : {break;}
+                                case "headlights" : {
+                                    Log.d(TAG, "HEADLIGHT: " + r.getValueAsString());
+                                    Type headLightType = new TypeToken<Headlights>(){}.getType();
+                                    Headlights h = gson.fromJson(r.getValueAsString(), headLightType);
+                                    Dao.getInstance().saveHeadlight(h);
+                                    break;
+                                }
                                 case "climatronic" : {
                                     Log.d(TAG, "CLIMATRONIC: " + r.getValueAsString());
                                     Type climatronicType = new TypeToken<Climatronic>(){}.getType();

@@ -18,8 +18,7 @@ public class AsyncTaskHeadlight extends AsyncTask<Headlights, Void, Void> {
         }
         Log.d(TAG, "new headlights values: " + headlights.toString());
         Headlights oldHeadlight = new Select().from(Headlights.class).executeSingle();
-        if (oldHeadlight == null || (oldHeadlight.getFogLight() == null || oldHeadlight.getHighBeams() == null ||
-                headlights.getLowBeams() == null)) {
+        if (oldHeadlight == null) {
             headlights.save();
         } else {
             Log.d(TAG, "old headlights values: " + oldHeadlight.toString());
