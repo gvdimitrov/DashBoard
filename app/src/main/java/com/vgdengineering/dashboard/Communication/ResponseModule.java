@@ -1,8 +1,5 @@
-package com.vgdengineering.dashboard.Communication;
+package com.vgdengineering.dashboard.communication;
 
-/**
- * Created by daniel on 6/10/17.
- */
 
 public class ResponseModule {
 

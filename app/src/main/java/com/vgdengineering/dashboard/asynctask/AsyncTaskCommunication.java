@@ -11,7 +11,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.vgdengineering.dashboard.Communication.ResponseModule;
+import com.vgdengineering.dashboard.communication.ResponseModule;
 import com.vgdengineering.dashboard.DashboardApplication;
 import com.vgdengineering.dashboard.database.communication.Dao;
 import com.vgdengineering.dashboard.database.entity.BeltsWarning;
@@ -21,10 +21,6 @@ import com.vgdengineering.dashboard.database.entity.Parktronik;
 
 import java.lang.reflect.Type;
 import java.util.List;
-
-/**
- * Created by daniel on 6/10/17.
- */
 
 public class AsyncTaskCommunication extends AsyncTask<Void, Void, Void>{
     private static final String TAG = AsyncTaskCommunication.class.getSimpleName();

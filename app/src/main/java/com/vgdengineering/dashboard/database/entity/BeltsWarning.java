@@ -46,7 +46,6 @@ public class BeltsWarning extends Model implements Parcelable {
     }
 
     public enum Priority {
-
         LOW(LOW_, 1), HIGH(HIGH_, 2);
 
         private String priority;
