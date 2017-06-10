@@ -4,13 +4,18 @@ import android.util.Log;
 
 import com.activeandroid.query.Select;
 import com.vgdengineering.dashboard.asynctask.AsyncTaskBeltsWarning;
+import com.vgdengineering.dashboard.asynctask.AsyncTaskHeadlight;
+import com.vgdengineering.dashboard.asynctask.AsyncTaskTripComputer;
 import com.vgdengineering.dashboard.database.entity.BeltsWarning;
 import com.vgdengineering.dashboard.database.entity.Climatronic;
 import com.vgdengineering.dashboard.database.entity.GearBox;
+import com.vgdengineering.dashboard.database.entity.Headlights;
+import com.vgdengineering.dashboard.database.entity.Light;
 import com.vgdengineering.dashboard.database.entity.Parktronik;
 import com.vgdengineering.dashboard.asynctask.AsyncTaskClimatronic;
 import com.vgdengineering.dashboard.asynctask.AsyncTaskGearBox;
 import com.vgdengineering.dashboard.asynctask.AsyncTaskParktronik;
+import com.vgdengineering.dashboard.database.entity.TripComputer;
 
 public class Dao implements IDao {
 
@@ -85,7 +90,7 @@ public class Dao implements IDao {
 
     @Override
     public void saveParktronik(Parktronik parktronik) {
-        if(parktronik == null){
+        if (parktronik == null) {
             Log.e(TAG, "Parktronik is null, cannot save it");
             return;
         }
@@ -95,7 +100,7 @@ public class Dao implements IDao {
     @Override
     public Parktronik getParktronik() {
         Parktronik parktronik = new Select().from(Parktronik.class).executeSingle();
-        if(parktronik== null){
+        if (parktronik == null) {
             Log.e(TAG, "The Parktronik table is empty");
         }
         return parktronik;
@@ -103,7 +108,7 @@ public class Dao implements IDao {
 
     @Override
     public void saveBeltWarning(BeltsWarning beltsWarning) {
-        if(beltsWarning == null){
+        if (beltsWarning == null) {
             Log.e(TAG, "BeltsWarning is null, cannot save it");
             return;
         }
@@ -113,17 +118,55 @@ public class Dao implements IDao {
     @Override
     public BeltsWarning getBeltsWarning() {
         BeltsWarning beltsWarning = new Select().from(BeltsWarning.class).executeSingle();
-        if(getParktronik() == null){
+        if (beltsWarning == null) {
             Log.e(TAG, "The BeltsWarning is empty");
         }
         return beltsWarning;
     }
 
-    public static void createDummyData(){
-            instance.saveClimatronic(new Climatronic(28,21,3));
-            instance.saveParktronik(new Parktronik(0,2));
-            instance.saveGearBox(new GearBox(2,3));
-            instance.saveBeltWarning(new BeltsWarning(true, BeltsWarning.Priority.HIGH.getPriority()));
+    @Override
+    public void saveHeadlight(Headlights headlights) {
+        if (headlights == null) {
+            Log.e(TAG, "Headlights is null, cannot save it");
+            return;
+        }
+        new AsyncTaskHeadlight().execute(headlights);
+    }
+
+    @Override
+    public Headlights getHeadlights() {
+        Headlights headlights = new Select().from(Headlights.class).executeSingle();
+        if (headlights == null) {
+            Log.e(TAG, "The Headlights is empty");
+        }
+        return headlights;
+    }
+
+    @Override
+    public void saveTripComputer(TripComputer tripComputer) {
+        if (tripComputer == null) {
+            Log.d(TAG, "TripComputer is null, cannot save it");
+            return;
+        }
+        new AsyncTaskTripComputer().execute(tripComputer);
+    }
+
+    @Override
+    public TripComputer getTripComputer() {
+        TripComputer tripComputer = new Select().from(TripComputer.class).executeSingle();
+        if (tripComputer == null) {
+            Log.e(TAG, "The Headlights is empty");
+        }
+        return tripComputer;
+    }
+
+    public static void createDummyData() {
+        instance.saveClimatronic(new Climatronic(28, 21, 3));
+        instance.saveParktronik(new Parktronik(0, 2));
+        instance.saveGearBox(new GearBox(2, 3));
+        instance.saveBeltWarning(new BeltsWarning(true, BeltsWarning.Priority.HIGH.getPriority()));
+        instance.saveHeadlight(new Headlights(new Light(true, 2), new Light(false, 1), new Light(true,5)));
+        instance.saveTripComputer(new TripComputer(1500));
     }
 
 }

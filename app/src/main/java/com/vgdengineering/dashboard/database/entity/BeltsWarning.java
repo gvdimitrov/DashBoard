@@ -12,7 +12,7 @@ public class BeltsWarning extends Model implements Parcelable {
     public static final String HIGH_ = "high";
 
     private boolean warningForSeatBelt;
-    private int warningSeverity;
+    private String warningSeverity;
 
     public BeltsWarning() {}
 
@@ -30,11 +30,11 @@ public class BeltsWarning extends Model implements Parcelable {
     }
 
     public String getWarningSeverity() {
-        return Priority.getPriorityName(warningSeverity);
+        return warningSeverity;
     }
 
     public void setWarningSeverity(String warningSeverity) {
-        this.warningSeverity = Priority.getPriorityId(warningSeverity);
+        this.warningSeverity = warningSeverity;
     }
 
     @Override
@@ -46,7 +46,6 @@ public class BeltsWarning extends Model implements Parcelable {
     }
 
     public enum Priority {
-
         LOW(LOW_, 1), HIGH(HIGH_, 2);
 
         private String priority;
@@ -99,12 +98,12 @@ public class BeltsWarning extends Model implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeByte(this.warningForSeatBelt ? (byte) 1 : (byte) 0);
-        dest.writeInt(this.warningSeverity);
+        dest.writeString(this.warningSeverity);
     }
 
     protected BeltsWarning(Parcel in) {
         this.warningForSeatBelt = in.readByte() != 0;
-        this.warningSeverity = in.readInt();
+        this.warningSeverity = in.readString();
     }
 
     public static final Parcelable.Creator<BeltsWarning> CREATOR = new Parcelable.Creator<BeltsWarning>() {
