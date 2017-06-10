@@ -15,7 +15,7 @@ public class Parktronik extends Model implements Parcelable {
 
     public static final String TAG = Parktronik.class.getSimpleName();
     public static final int MIN = 0;
-    public static final int MAX = 5;
+    public static final int MAX = 6;
     @Column(name = "front")
     private int front;
     @Column(name = "rear")

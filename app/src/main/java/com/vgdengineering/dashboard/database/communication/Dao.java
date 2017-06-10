@@ -161,12 +161,29 @@ public class Dao implements IDao {
     }
 
     public static void createDummyData() {
-//        instance.saveClimatronic(new Climatronic(28, 21, 3));
-//        instance.saveParktronik(new Parktronik(0, 2));
-//        instance.saveGearBox(new GearBox(2, 3));
-//        instance.saveBeltWarning(new BeltsWarning(true, BeltsWarning.Priority.HIGH.getPriority()));
-        instance.saveHeadlight(new Headlights(new Light(true, 2), new Light(false, 1), new Light(true,5)));
-        instance.saveTripComputer(new TripComputer(1500));
+        if(instance.getClimatronic() == null) {
+            instance.saveClimatronic(new Climatronic(28, 21, 3));
+        }
+
+        if(instance.getParktronik() == null) {
+            instance.saveParktronik(new Parktronik(0, 2));
+        }
+
+        if(instance.getGearBox() == null) {
+            instance.saveGearBox(new GearBox(2, 3));
+        }
+
+        if(instance.getBeltsWarning() == null) {
+            instance.saveBeltWarning(new BeltsWarning(true, BeltsWarning.Priority.HIGH.getPriority()));
+        }
+
+        if(instance.getHeadlights() == null) {
+            instance.saveHeadlight(new Headlights(new Light(true, 2), new Light(false, 1), new Light(true, 5)));
+        }
+
+        if(instance.getTripComputer() == null) {
+            instance.saveTripComputer(new TripComputer(1500));
+        }
     }
 
 }

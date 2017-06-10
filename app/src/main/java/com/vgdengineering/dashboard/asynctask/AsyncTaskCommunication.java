@@ -18,6 +18,7 @@ import com.vgdengineering.dashboard.database.entity.BeltsWarning;
 import com.vgdengineering.dashboard.database.entity.Climatronic;
 import com.vgdengineering.dashboard.database.entity.GearBox;
 import com.vgdengineering.dashboard.database.entity.Parktronik;
+import com.vgdengineering.dashboard.database.entity.TripComputer;
 
 import java.lang.reflect.Type;
 import java.util.List;
@@ -45,7 +46,13 @@ public class AsyncTaskCommunication extends AsyncTask<Void, Void, Void>{
 
                         for(ResponseModule r : a){
                             switch (r.getModuleName()){
-                                case "trip" : {break;}
+                                case "trip" : {
+                                    Log.d(TAG, "TRIP: " + r.getValueAsString());
+                                    Type tripType = new TypeToken<TripComputer>(){}.getType();
+                                    TripComputer tc = gson.fromJson(r.getValueAsString(), tripType);
+                                    Dao.getInstance().saveTripComputer(tc);
+                                    break;
+                                }
                                 case "belt" : {
                                     Log.d(TAG, "BELT: " + r.getValueAsString());
                                     Type beltType = new TypeToken<BeltsWarning>(){}.getType();
@@ -89,28 +96,6 @@ public class AsyncTaskCommunication extends AsyncTask<Void, Void, Void>{
         });
 // Add the request to the RequestQueue.
         queue.add(stringRequest);
-
-        /*try {
-            HttpClient httpclient = new DefaultHttpClient();
-            HttpResponse response = httpclient.execute(new HttpGet("http://165.227.134.146:8080/communication/messages"));
-            StatusLine statusLine = response.getStatusLine();
-            if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
-                ByteArrayOutputStream out = new ByteArrayOutputStream();
-                response.getEntity().writeTo(out);
-                String responseString = out.toString();
-                out.close();
-                Log.d("AsyncTaskCommunication", responseString);
-                //..more logic
-            } else {
-                //Closes the connection.
-                response.getEntity().getContent().close();
-                throw new IOException(statusLine.getReasonPhrase());
-            }
-        }
-        catch (Exception e)
-        {
-
-        }*/
 
     }
 

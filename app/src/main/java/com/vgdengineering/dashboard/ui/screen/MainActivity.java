@@ -2,6 +2,7 @@ package com.vgdengineering.dashboard.ui.screen;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -27,6 +28,7 @@ import java.util.Observer;
 
 public class MainActivity extends AppCompatActivity implements Observer {
 
+    private static final String TAG = "MainActivity";
     private int rpm = 0;
     private int speed = 0;
     private int carTemp, outTemp, fan = 1;
@@ -47,8 +49,27 @@ public class MainActivity extends AppCompatActivity implements Observer {
 
         ObservableDatabaseData.getInstance().addObserver(this);
         Dao.createDummyData();
-        new AsyncTaskCommunication().execute();
-        //new AsyncTaskCommunication().execute();
+
+
+        Thread t2 = new Thread() {
+
+            @Override
+            public void run() {
+                try {
+                    while (true) {
+                        new AsyncTaskCommunication().execute();
+                        Thread.sleep(1000);
+                    }
+                }
+                catch(Exception e){
+                    Log.d(TAG, "Exception in loop: " + e.getMessage());
+                }
+            }
+        };
+
+        t2.start();
+
+
 
         Thread t1 = new Thread() {
 
