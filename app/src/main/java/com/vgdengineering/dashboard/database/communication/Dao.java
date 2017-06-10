@@ -120,10 +120,10 @@ public class Dao implements IDao {
     }
 
     public static void createDummyData(){
-            instance.saveClimatronic(new Climatronic(28,21,3));
-            instance.saveParktronik(new Parktronik(0,2));
-            instance.saveGearBox(new GearBox(2,3));
-            instance.saveBeltWarning(new BeltsWarning(true, BeltsWarning.Priority.HIGH.getPriority()));
+//            instance.saveClimatronic(new Climatronic(28,21,3));
+            //instance.saveParktronik(new Parktronik(0,2));
+            //instance.saveGearBox(new GearBox(2,3));
+//            instance.saveBeltWarning(new BeltsWarning(true, BeltsWarning.Priority.HIGH.getPriority()));
     }
 
 }

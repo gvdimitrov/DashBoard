@@ -9,7 +9,9 @@ import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+
 import com.vgdengineering.dashboard.R;
+import com.vgdengineering.dashboard.asynctask.AsyncTaskCommunication;
 import com.vgdengineering.dashboard.database.communication.Dao;
 import com.vgdengineering.dashboard.database.communication.IDao;
 import com.vgdengineering.dashboard.database.entity.BeltsWarning;
@@ -45,6 +47,8 @@ public class MainActivity extends AppCompatActivity implements Observer {
 
         ObservableDatabaseData.getInstance().addObserver(this);
         Dao.createDummyData();
+        new AsyncTaskCommunication().execute();
+        //new AsyncTaskCommunication().execute();
 
         Thread t1 = new Thread() {
 
