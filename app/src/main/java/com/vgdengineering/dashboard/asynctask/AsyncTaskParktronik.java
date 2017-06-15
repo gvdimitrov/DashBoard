@@ -15,15 +15,12 @@ public class AsyncTaskParktronik extends AsyncTask<Parktronik, Void, Void> {
             Log.e(TAG, "The Parktronik object is null, cannot save it!");
             return;
         }
-        Log.d(TAG, "new parktronik values: " + parktronik.toString());
         Parktronik oldParktronik = new Select().from(Parktronik.class).executeSingle();
         if (oldParktronik == null) {
             parktronik.save();
         } else {
-            Log.d(TAG, "old parktronik values: " + oldParktronik.toString());
             oldParktronik.setFront(parktronik.getFront());
             oldParktronik.setRear(parktronik.getRear());
-            Log.d(TAG, "old parktronik with new values: " + oldParktronik.toString());
             oldParktronik.save();
         }
     }

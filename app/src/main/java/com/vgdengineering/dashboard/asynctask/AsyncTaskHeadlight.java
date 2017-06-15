@@ -16,16 +16,13 @@ public class AsyncTaskHeadlight extends AsyncTask<Headlights, Void, Void> {
             Log.e(TAG, "The Headlights object is null, cannot save it!");
             return;
         }
-        Log.d(TAG, "new headlights values: " + headlights.toString());
         Headlights oldHeadlight = new Select().from(Headlights.class).executeSingle();
         if (oldHeadlight == null) {
             headlights.save();
         } else {
-            Log.d(TAG, "old headlights values: " + oldHeadlight.toString());
             oldHeadlight.setHighBeams(headlights.getHighBeams());
             oldHeadlight.setLowBeams(headlights.getLowBeams());
             oldHeadlight.setFogLight(headlights.getFogLight());
-            Log.d(TAG, "old headlights with new values: " + oldHeadlight.toString());
 
             oldHeadlight.save();
         }

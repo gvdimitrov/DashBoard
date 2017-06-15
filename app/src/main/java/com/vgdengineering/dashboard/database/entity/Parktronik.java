@@ -29,8 +29,8 @@ public class Parktronik extends Model implements Parcelable {
         if (isValueValid(front)) {
             this.front = front;
         } else {
-            Log.e(TAG, "The front value is out of range -> " + front, new InvalidParameterException());
             front = 0;
+            Log.e(TAG, "The front value is out of range -> " + front, new InvalidParameterException());
         }
     }
 
@@ -42,8 +42,8 @@ public class Parktronik extends Model implements Parcelable {
         if(isValueValid(rear)) {
             this.rear = rear;
         }else{
-            Log.e(TAG, "The rear value is out of range -> " + rear, new InvalidParameterException());
             rear = 0;
+            Log.e(TAG, "The rear value is out of range -> " + rear, new InvalidParameterException());
         }
     }
 

@@ -8,7 +8,7 @@ import com.activeandroid.query.Select;
 import com.vgdengineering.dashboard.database.entity.BeltsWarning;
 import com.vgdengineering.dashboard.observables.ObservableDatabaseData;
 
-public class AsyncTaskBeltsWarning extends AsyncTask<BeltsWarning, Void,Void> {
+public class AsyncTaskBeltsWarning extends AsyncTask<BeltsWarning, Void,BeltsWarning> {
     private static final String TAG = AsyncTaskBeltsWarning.class.getSimpleName();
 
     private static void saveBeltsWarning(BeltsWarning beltsWarning) {
@@ -16,26 +16,23 @@ public class AsyncTaskBeltsWarning extends AsyncTask<BeltsWarning, Void,Void> {
             Log.e(TAG, "The BeltsWarning object is null, cannot save it!");
             return;
         }
-        Log.d(TAG, "new beltsWarning values: " + beltsWarning.toString());
         BeltsWarning oldbeltsWarning = new Select().from(BeltsWarning.class).executeSingle();
         if (oldbeltsWarning == null) {
             beltsWarning.save();
         } else {
-            Log.d(TAG, "old beltsWarning values: " + oldbeltsWarning.toString());
             oldbeltsWarning.setWarningForSeatBelt(beltsWarning.isWarningForSeatBelt());
             oldbeltsWarning.setWarningSeverity(beltsWarning.getWarningSeverity());
-            Log.d(TAG, "old beltsWarning with new values: " + oldbeltsWarning.toString());
             oldbeltsWarning.save();
         }
     }
     @Override
-    protected Void doInBackground(BeltsWarning... params) {
+    protected BeltsWarning doInBackground(BeltsWarning... params) {
         saveBeltsWarning(params[0]);
-        return null;
+        return params[0];
     }
 
     @Override
-    protected void onPostExecute(Void aVoid) {
-        ObservableDatabaseData.getInstance().notifyDateSetChange();
+    protected void onPostExecute(BeltsWarning beltsWarning) {
+        ObservableDatabaseData.getInstance().notifyDateSetChange(beltsWarning);
     }
 }

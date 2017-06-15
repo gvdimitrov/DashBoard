@@ -15,6 +15,7 @@ public class DashboardApplication extends Application {
         context = this;
         ActiveAndroid.initialize(this);
         Dao.create();
+        Dao.createDummyData();
     }
 
     public static Context getAppContext() {

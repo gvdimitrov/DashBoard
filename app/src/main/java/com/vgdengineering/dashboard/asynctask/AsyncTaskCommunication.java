@@ -24,13 +24,14 @@ import com.vgdengineering.dashboard.database.entity.TripComputer;
 import java.lang.reflect.Type;
 import java.util.List;
 
-public class AsyncTaskCommunication extends AsyncTask<Void, Void, Void>{
+public class AsyncTaskCommunication extends AsyncTask<Void, Void, Void> {
     private static final String TAG = AsyncTaskCommunication.class.getSimpleName();
+
     private static void getData() {
 
 // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(DashboardApplication.getAppContext());
-        String url ="http://165.227.134.146:8080/communication/messages";
+        String url = "http://165.227.134.146:8080/communication/messages";
 
 // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -42,55 +43,55 @@ public class AsyncTaskCommunication extends AsyncTask<Void, Void, Void>{
 
                         Gson gson = new Gson();
 
-                        Type type = new TypeToken<List<ResponseModule>>(){}.getType();
+                        Type type = new TypeToken<List<ResponseModule>>() {
+                        }.getType();
                         List<ResponseModule> a = gson.fromJson(response, type);
 
-                        for(ResponseModule r : a){
-                            switch (r.getModuleName()){
-                                case "trip" : {
-                                    Log.d(TAG, "TRIP: " + r.getValueAsString());
-                                    Type tripType = new TypeToken<TripComputer>(){}.getType();
+                        for (ResponseModule r : a) {
+                            switch (r.getModuleName()) {
+                                case "trip": {
+                                    Type tripType = new TypeToken<TripComputer>() {
+                                    }.getType();
                                     TripComputer tc = gson.fromJson(r.getValueAsString(), tripType);
                                     Dao.getInstance().saveTripComputer(tc);
                                     break;
                                 }
-                                case "belt" : {
-                                    Log.d(TAG, "BELT: " + r.getValueAsString());
-                                    Type beltType = new TypeToken<BeltsWarning>(){}.getType();
+                                case "belt": {
+                                    Type beltType = new TypeToken<BeltsWarning>() {
+                                    }.getType();
                                     BeltsWarning bw = gson.fromJson(r.getValueAsString(), beltType);
                                     Dao.getInstance().saveBeltWarning(bw);
                                     break;
                                 }
-                                case "headlights" : {
-                                    Log.d(TAG, "HEADLIGHT: " + r.getValueAsString());
-                                    Type headLightType = new TypeToken<Headlights>(){}.getType();
+                                case "headlights": {
+                                    Type headLightType = new TypeToken<Headlights>() {
+                                    }.getType();
                                     Headlights h = gson.fromJson(r.getValueAsString(), headLightType);
                                     Dao.getInstance().saveHeadlight(h);
                                     break;
                                 }
-                                case "climatronic" : {
-                                    Log.d(TAG, "CLIMATRONIC: " + r.getValueAsString());
-                                    Type climatronicType = new TypeToken<Climatronic>(){}.getType();
+                                case "climatronic": {
+                                    Type climatronicType = new TypeToken<Climatronic>() {
+                                    }.getType();
                                     Climatronic c = gson.fromJson(r.getValueAsString(), climatronicType);
                                     Dao.getInstance().saveClimatronic(c);
                                     break;
                                 }
-                                case "parktronic" : {
-                                    Log.d(TAG, "PARKTRONIC: " + r.getValueAsString());
-                                    Type parktronicType = new TypeToken<Parktronik>(){}.getType();
+                                case "parktronic": {
+                                    Type parktronicType = new TypeToken<Parktronik>() {
+                                    }.getType();
                                     Parktronik p = gson.fromJson(r.getValueAsString(), parktronicType);
                                     Dao.getInstance().saveParktronik(p);
                                     break;
                                 }
-                                case "gear" : {
-                                    Log.d(TAG, "GEARBOX: " + r.getValueAsString());
-                                    Type gearBoxType = new TypeToken<GearBox>(){}.getType();
+                                case "gear": {
+                                    Type gearBoxType = new TypeToken<GearBox>() {
+                                    }.getType();
                                     GearBox gb = gson.fromJson(r.getValueAsString(), gearBoxType);
                                     Dao.getInstance().saveGearBox(gb);
                                     break;
                                 }
                             }
-                            Log.d(AsyncTaskCommunication.class.getSimpleName(),"ModuleName: "+ r.getModuleName());
                         }
 
 

@@ -195,17 +195,28 @@
     <ImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginLeft="345dp"
-        android:layout_marginTop="60dp"
-        app:srcCompat="@drawable/highbeams" />
+        android:layout_marginLeft="365dp"
+        android:layout_marginTop="45dp"
+        app:srcCompat="@drawable/highbeams"
+        android:id="@+id/highbeams"/>
 
     <ImageView
         android:layout_width="110dp"
         android:layout_height="75dp"
-        android:layout_marginLeft="240dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginLeft="265dp"
+        android:layout_marginTop="35dp"
         android:scaleType="fitXY"
-        app:srcCompat="@drawable/lowbeams" />
+        app:srcCompat="@drawable/lowbeams"
+        android:id="@+id/lowbeams"/>
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="230dp"
+        android:layout_marginTop="45dp"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/foglamp"
+        android:id="@+id/foglamp"/>
 
     <TextView
         android:id="@+id/txtDistance"
@@ -214,11 +225,11 @@
         android:layout_marginLeft="250dp"
         android:layout_marginTop="220dp"
         android:background="#606060"
-        android:text="2000"
         android:textAlignment="center"
         android:textColor="#ffff00"
         android:textSize="20dp"
         android:textStyle="bold" />
+
 
     <TextClock
         android:id="@+id/textClock"

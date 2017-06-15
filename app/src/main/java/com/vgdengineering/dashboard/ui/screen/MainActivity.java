@@ -18,12 +18,15 @@ import com.vgdengineering.dashboard.database.communication.IDao;
 import com.vgdengineering.dashboard.database.entity.BeltsWarning;
 import com.vgdengineering.dashboard.database.entity.Climatronic;
 import com.vgdengineering.dashboard.database.entity.GearBox;
+import com.vgdengineering.dashboard.database.entity.Headlights;
 import com.vgdengineering.dashboard.database.entity.Parktronik;
+import com.vgdengineering.dashboard.database.entity.TripComputer;
 import com.vgdengineering.dashboard.observables.ObservableDatabaseData;
 import com.vgdengineering.dashboard.ui.view.CircularSeekBar;
 
 import java.util.Observable;
 import java.util.Observer;
+import java.util.concurrent.TimeUnit;
 
 
 public class MainActivity extends AppCompatActivity implements Observer {
@@ -36,7 +39,9 @@ public class MainActivity extends AppCompatActivity implements Observer {
     private int frontsensor = 0, backsensor = 0;
     private boolean beltsSensor;
     private String beltsSeverity;
-    private boolean flag1 = false,flag2 = false,flag3 = false,flag4 = false,flag5 = false,flag6 = false,flagR = false;
+    private boolean hbeams, lbeams, fbeams;
+    private int distance;
+    private boolean flag1 = false, flag2 = false, flag3 = false, flag4 = false, flag5 = false, flag6 = false, flagR = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +53,6 @@ public class MainActivity extends AppCompatActivity implements Observer {
         setContentView(R.layout.activity_main);
 
         ObservableDatabaseData.getInstance().addObserver(this);
-        Dao.createDummyData();
-
 
         Thread t2 = new Thread() {
 
@@ -57,18 +60,16 @@ public class MainActivity extends AppCompatActivity implements Observer {
             public void run() {
                 try {
                     while (true) {
+                        TimeUnit.SECONDS.sleep(1);
                         new AsyncTaskCommunication().execute();
-                        Thread.sleep(1000);
                     }
-                }
-                catch(Exception e){
+                } catch (Exception e) {
                     Log.d(TAG, "Exception in loop: " + e.getMessage());
                 }
             }
         };
 
         t2.start();
-
 
 
         Thread t1 = new Thread() {
@@ -93,10 +94,8 @@ public class MainActivity extends AppCompatActivity implements Observer {
         t1.start();
     }
 
-    public void updateSpeed()
-    {
-        if (gear ==0)
-        {
+    public void updateSpeed() {
+        if (gear == 0) {
             rpm = 800;
             speed = 0;
 
@@ -109,18 +108,14 @@ public class MainActivity extends AppCompatActivity implements Observer {
             seekbar1.setProgress(speed);
             TextView txt1 = (TextView) findViewById(R.id.speed);
             txt1.setText(Integer.toString(speed));
-        }
-
-        else if(gear == 1)
-        {
+        } else if (gear == 1) {
             flag2 = false;
             flag3 = false;
             flag4 = false;
             flag5 = false;
             flag6 = false;
             flagR = false;
-            if(flag1 == false)
-            {
+            if (flag1 == false) {
                 rpm = 800;
                 speed = 0;
                 flag1 = true;
@@ -136,8 +131,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
             TextView txt1 = (TextView) findViewById(R.id.speed);
             txt1.setText(Integer.toString(speed));
 
-            if (rpm <= 2000)
-            {
+            if (rpm <= 2000) {
 
                 rpm = rpm + 40;
                 speed = speed + 1;
@@ -150,18 +144,14 @@ public class MainActivity extends AppCompatActivity implements Observer {
             }
 
 
-        }
-
-        else if(gear == 2)
-        {
+        } else if (gear == 2) {
             flag1 = false;
             flag3 = false;
             flag4 = false;
             flag5 = false;
             flag6 = false;
             flagR = false;
-            if(flag2 == false)
-            {
+            if (flag2 == false) {
                 rpm = 1000;
                 speed = 28;
                 flag2 = true;
@@ -178,8 +168,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
             TextView txt1 = (TextView) findViewById(R.id.speed);
             txt1.setText(Integer.toString(speed));
 
-            if (rpm <= 2600)
-            {
+            if (rpm <= 2600) {
                 rpm = rpm + 40;
                 speed = speed + 1;
 
@@ -190,18 +179,14 @@ public class MainActivity extends AppCompatActivity implements Observer {
                 txt1.setText(Integer.toString(speed));
             }
 
-        }
-
-        else if(gear == 3)
-        {
+        } else if (gear == 3) {
             flag1 = false;
             flag2 = false;
             flag4 = false;
             flag5 = false;
             flag6 = false;
             flagR = false;
-            if(flag3 == false)
-            {
+            if (flag3 == false) {
                 rpm = 1200;
                 speed = 68;
                 flag3 = true;
@@ -218,8 +203,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
             TextView txt1 = (TextView) findViewById(R.id.speed);
             txt1.setText(Integer.toString(speed));
 
-            if (rpm <= 3200)
-            {
+            if (rpm <= 3200) {
                 rpm = rpm + 40;
                 speed = speed + 1;
 
@@ -230,18 +214,14 @@ public class MainActivity extends AppCompatActivity implements Observer {
                 txt1.setText(Integer.toString(speed));
             }
 
-        }
-
-        else if(gear == 4)
-        {
+        } else if (gear == 4) {
             flag1 = false;
             flag2 = false;
             flag3 = false;
             flag5 = false;
             flag6 = false;
             flagR = false;
-            if(flag4 == false)
-            {
+            if (flag4 == false) {
                 rpm = 1200;
                 speed = 115;
                 flag4 = true;
@@ -258,8 +238,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
             TextView txt1 = (TextView) findViewById(R.id.speed);
             txt1.setText(Integer.toString(speed));
 
-            if (rpm <= 3200)
-            {
+            if (rpm <= 3200) {
                 rpm = rpm + 40;
                 speed = speed + 1;
 
@@ -270,18 +249,14 @@ public class MainActivity extends AppCompatActivity implements Observer {
                 txt1.setText(Integer.toString(speed));
             }
 
-        }
-
-        else if(gear == 5)
-        {
+        } else if (gear == 5) {
             flag1 = false;
             flag2 = false;
             flag3 = false;
             flag4 = false;
             flag6 = false;
             flagR = false;
-            if(flag5 == false)
-            {
+            if (flag5 == false) {
                 rpm = 1400;
                 speed = 168;
                 flag5 = true;
@@ -299,8 +274,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
             TextView txt1 = (TextView) findViewById(R.id.speed);
             txt1.setText(Integer.toString(speed));
 
-            if (rpm <= 3800)
-            {
+            if (rpm <= 3800) {
                 rpm = rpm + 40;
                 speed = speed + 1;
 
@@ -311,18 +285,14 @@ public class MainActivity extends AppCompatActivity implements Observer {
                 txt1.setText(Integer.toString(speed));
             }
 
-        }
-
-        else if(gear == 6)
-        {
+        } else if (gear == 6) {
             flag1 = false;
             flag2 = false;
             flag3 = false;
             flag4 = false;
             flag5 = false;
             flagR = false;
-            if(flag6 == false)
-            {
+            if (flag6 == false) {
                 rpm = 1400;
                 speed = 220;
                 flag6 = true;
@@ -339,8 +309,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
             TextView txt1 = (TextView) findViewById(R.id.speed);
             txt1.setText(Integer.toString(speed));
 
-            if (rpm <= 1600)
-            {
+            if (rpm <= 1600) {
                 rpm = rpm + 40;
                 speed = speed + 2;
 
@@ -351,18 +320,14 @@ public class MainActivity extends AppCompatActivity implements Observer {
                 txt1.setText(Integer.toString(speed));
             }
 
-        }
-
-        else if(gear == -1)
-        {
+        } else if (gear == -1) {
             flag1 = false;
             flag2 = false;
             flag3 = false;
             flag4 = false;
             flag5 = false;
             flag6 = false;
-            if(flagR == false)
-            {
+            if (flagR == false) {
                 rpm = 800;
                 speed = 0;
                 flagR = true;
@@ -379,8 +344,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
             TextView txt1 = (TextView) findViewById(R.id.speed);
             txt1.setText(Integer.toString(speed));
 
-            if (rpm <= 1200)
-            {
+            if (rpm <= 1200) {
                 rpm = rpm + 40;
                 speed = speed + 1;
 
@@ -394,16 +358,14 @@ public class MainActivity extends AppCompatActivity implements Observer {
         }
     }
 
-    public void updateSeatBelt()
-    {
+    public void updateSeatBelt() {
         ImageView imgBelt = (ImageView) findViewById(R.id.seatbelts1);
 
-        if(beltsSensor == true){
-
-
-            if(beltsSeverity.equals("high")){
+        if (beltsSensor == true) {
+            if (beltsSeverity.equals("high")) {
+                Log.d(TAG, "updateSeatBelt: it's time to change the belts ");
                 final Animation animation = new AlphaAnimation((float) 1, 0); // Change alpha from fully visible to invisible
-                animation.setDuration(250); // duration - half a second
+                animation.setDuration(500); // duration - half a second
                 animation.setInterpolator(new LinearInterpolator()); // do not alter
                 // animation
                 // rate
@@ -414,12 +376,11 @@ public class MainActivity extends AppCompatActivity implements Observer {
                 // fade back in
                 imgBelt.startAnimation(animation);
 
-            }
-            else if(beltsSeverity.equals("low")){
+            } else if (beltsSeverity.equals("low")) {
                 imgBelt.setVisibility(View.VISIBLE);
             }
 
-        }else {
+        } else {
             imgBelt.setVisibility(View.GONE);
         }
 
@@ -442,13 +403,11 @@ public class MainActivity extends AppCompatActivity implements Observer {
         currentgear1.setText(Integer.toString(gear));
         nextgear1.setText(Integer.toString(nextGear));
 
-        if(gear == (-1))
-        {
+        if (gear == (-1)) {
             currentgear1.setText("R");
         }
 
-        if(nextGear == (-1))
-        {
+        if (nextGear == (-1)) {
             nextgear1.setText("R");
         }
     }
@@ -544,6 +503,33 @@ public class MainActivity extends AppCompatActivity implements Observer {
         }
     }
 
+    public void updateHeadlights() {
+        ImageView hbeamsimg = (ImageView) findViewById(R.id.highbeams);
+        ImageView lbeamsimg = (ImageView) findViewById(R.id.lowbeams);
+        ImageView foglampimg = (ImageView) findViewById(R.id.foglamp);
+        if (hbeams == true) {
+            hbeamsimg.setVisibility(View.VISIBLE);
+        } else if (hbeams == false) {
+            hbeamsimg.setVisibility(View.GONE);
+        }
+        if (lbeams == true) {
+            lbeamsimg.setVisibility(View.VISIBLE);
+        } else if (lbeams == false) {
+            lbeamsimg.setVisibility(View.GONE);
+        }
+        if (fbeams == true) {
+            foglampimg.setVisibility(View.VISIBLE);
+        } else if (fbeams == false) {
+            foglampimg.setVisibility(View.GONE);
+        }
+    }
+
+    public void updateTripComputer()
+    {
+        TextView txtdistance = (TextView) findViewById(R.id.txtDistance);
+        txtdistance.setText(Integer.toString(distance));
+    }
+
     @Override
     public void update(Observable o, Object arg) {
         IDao dao = Dao.getInstance();
@@ -561,14 +547,33 @@ public class MainActivity extends AppCompatActivity implements Observer {
         frontsensor = parking1.getFront();
         backsensor = parking1.getRear();
 
-        BeltsWarning belts1 = dao.getBeltsWarning();
-        beltsSensor = belts1.isWarningForSeatBelt();
-        beltsSeverity = belts1.getWarningSeverity();
+        if(o!= null ) {
+            ObservableDatabaseData observable = (ObservableDatabaseData)o;
+            if(observable.getBeltsWarning() != null) {
+                Log.e(TAG, "Update only Belts: " +observable.getBeltsWarning());
+                BeltsWarning belts1 = dao.getBeltsWarning();
+                beltsSensor = belts1.isWarningForSeatBelt();
+                beltsSeverity = belts1.getWarningSeverity();
+                updateSeatBelt();
+            }else{
+                Log.e(TAG, "No belts to update ");
+            }
+        }
+
+        Headlights lights1 = dao.getHeadlights();
+        hbeams = lights1.getHighBeams();
+        lbeams = lights1.getLowBeams();
+        fbeams = lights1.getFogLight();
+
+        TripComputer tripcomp1 = dao.getTripComputer();
+        distance = tripcomp1.getDistance();
+
 
         updateClimatronic();
         updateParktronic();
         updateGear();
-        updateSeatBelt();
+        updateHeadlights();
+        updateTripComputer();
     }
 
     public class CircleSeekBarListener implements CircularSeekBar.OnCircularSeekBarChangeListener {

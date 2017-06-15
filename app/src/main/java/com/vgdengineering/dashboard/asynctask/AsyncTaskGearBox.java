@@ -16,15 +16,12 @@ public class AsyncTaskGearBox extends AsyncTask<GearBox, Void, Void> {
             Log.e(TAG, "The GearBox object is null, cannot save it!");
             return;
         }
-        Log.d(TAG, "new gear values: " + gearBox.toString());
         GearBox oldGearBox = new Select().from(GearBox.class).executeSingle();
         if (oldGearBox == null) {
             gearBox.save();
         } else {
-            Log.d(TAG, "old gear values: " + oldGearBox.toString());
             oldGearBox.setNextGear(gearBox.getNextGear());
             oldGearBox.setCurrentGear(gearBox.getCurrentGear());
-            Log.d(TAG, "old gear with new values: " + oldGearBox.toString());
             oldGearBox.save();
         }
     }
